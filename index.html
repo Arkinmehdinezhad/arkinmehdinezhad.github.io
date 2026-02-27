@@ -1,31 +1,384 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Arkin Mehdinezhad</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arkin Mehdinezhad | Portfolio</title>
+  <meta name="description" content="Arkin Mehdinezhad - Automation Developer | n8n Specialist | Python Enthusiast" />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --text:#e8eef6;
+      --muted:#a7b4c3;
+      --line: rgba(255,255,255,.12);
+      --blue:#00bfff;
+      --blue2:#4dd2ff;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(0,191,255,.18), transparent 60%),
+        radial-gradient(700px 400px at 85% 20%, rgba(77,210,255,.14), transparent 60%),
+        radial-gradient(900px 600px at 50% 90%, rgba(0,191,255,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1100px; margin:0 auto; padding:28px 18px 70px;}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(14px);
+      background: rgba(11,15,20,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto; padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.3px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      box-shadow: 0 0 18px rgba(0,191,255,.55);
+    }
+    .nav{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:14px; color:var(--muted);
+    }
+    .nav a{padding:8px 10px; border-radius:10px}
+    .nav a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+
+    /* Hero */
+    .hero{
+      display:grid; grid-template-columns: 1.2fr .8fr;
+      gap:18px; align-items:stretch; margin-top:18px;
+    }
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr; } }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.04));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left{padding:26px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:13px; color:var(--muted);
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      padding:7px 10px; border-radius: 999px;
+    }
+    .kicker b{color:var(--text)}
+    h1{
+      margin:14px 0 10px;
+      font-size:44px;
+      line-height:1.1;
+      letter-spacing:-.8px;
+    }
+    @media (max-width: 520px){ h1{font-size:34px} }
+    .subtitle{
+      color:var(--muted);
+      font-size:16px;
+      max-width: 60ch;
+      line-height:1.6;
+      margin:0 0 18px;
+    }
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 8px;}
+    .pill{
+      font-size:13px; color:var(--text);
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+    }
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:11px 14px; border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      font-weight:600; font-size:14px;
+      transition: transform .15s ease, background .15s ease, border .15s ease;
+    }
+    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.09)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(0,191,255,.22), rgba(77,210,255,.10));
+      border-color: rgba(0,191,255,.35);
+    }
+
+    /* Right card */
+    .hero-right{padding:22px; display:flex; flex-direction:column; gap:12px;}
+    .avatar{
+      display:flex; align-items:center; gap:12px;
+      padding:14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--line);
+    }
+    .pic{
+      width:56px; height:56px; border-radius:14px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(0,191,255,.55), transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(77,210,255,.35), transparent 55%),
+        rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      position:relative;
+      overflow:hidden;
+    }
+    .pic::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 220deg, transparent, rgba(255,255,255,.12), transparent);
+      animation: spin 5s linear infinite;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+    .who b{display:block; font-size:16px}
+    .who span{color:var(--muted); font-size:13px}
+
+    .statgrid{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .stat{
+      padding:14px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+    }
+    .stat .num{font-size:18px; font-weight:800}
+    .stat .label{font-size:12px; color:var(--muted); margin-top:4px}
+
+    /* Sections */
+    .section{margin-top:18px;}
+    .section h2{
+      font-size:18px;
+      letter-spacing:.2px;
+      margin:0 0 10px;
+      color:var(--text);
+    }
+    .grid{
+      display:grid; grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns: 1fr 1fr;} }
+    @media (max-width: 560px){ .grid{grid-template-columns: 1fr;} }
+
+    .item{
+      padding:16px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+      transition: transform .15s ease, background .15s ease;
+    }
+    .item:hover{transform: translateY(-2px); background: rgba(255,255,255,.08)}
+    .item b{display:block; font-size:14px; margin-bottom:6px}
+    .item p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    .chip{
+      font-size:12px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(0,191,255,.08);
+      color: var(--text);
+    }
+
+    /* Footer */
+    footer{
+      margin-top:26px;
+      padding:18px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size:13px;
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    }
+
+    /* Simple fade-in */
+    .fade{
+      opacity:0;
+      transform: translateY(8px);
+      animation: fadeIn .7s ease forwards;
+    }
+    .d1{animation-delay:.05s}
+    .d2{animation-delay:.15s}
+    .d3{animation-delay:.25s}
+    .d4{animation-delay:.35s}
+    @keyframes fadeIn{
+      to{opacity:1; transform: translateY(0);}
+    }
+  </style>
 </head>
 
-<body style="background:#0f0f0f; color:white; text-align:center; font-family:Arial; padding:50px;">
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Arkin</span>
+      </div>
+      <div class="nav">
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
 
-  <h1 style="font-size:40px;">Arkin Mehdinezhad</h1>
+  <div class="container">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="card hero-left fade d1">
+        <div class="kicker">⚡ <b>Available</b> for freelance automation</div>
+        <h1>Arkin Mehdinezhad</h1>
+        <p class="subtitle">
+          I build <b>automation systems</b> and <b>Telegram bots</b> using <b>n8n</b> and <b>Python</b>.
+          Clean workflows, reliable integrations, and real results.
+        </p>
 
-  <p style="font-size:20px; color:#00bfff;">
-    Automation Developer | n8n Specialist | Python Enthusiast
-  </p>
+        <div class="pillrow">
+          <span class="pill">n8n • Automation</span>
+          <span class="pill">Python</span>
+          <span class="pill">API Integration</span>
+          <span class="pill">GitHub</span>
+        </div>
 
-  <hr style="width:50%; margin:40px auto; border:1px solid #333;">
+        <div class="actions">
+          <!-- لینک‌ها رو بعداً عوض می‌کنی -->
+          <a class="btn primary" href="#contact">Contact me</a>
+          <a class="btn" href="https://github.com/Arkinmehdinezhad" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
 
-  <h2>About Me</h2>
-  <p style="max-width:600px; margin:auto;">
-    I build automation systems, Telegram bots and workflow solutions using n8n and Python.
-    Passionate about technology and international IT career.
-  </p>
+      <div class="card hero-right fade d2">
+        <div class="avatar">
+          <div class="pic" title="Add your photo later"></div>
+          <div class="who">
+            <b>Automation Developer</b>
+            <span>n8n • Python • Telegram Bots</span>
+          </div>
+        </div>
 
-  <h2 style="margin-top:50px;">Skills</h2>
-  <p>
-    Python • n8n • API Integration • GitHub • Automation • Telegram Bots
-  </p>
+        <div class="statgrid">
+          <div class="stat">
+            <div class="num">Fast</div>
+            <div class="label">Delivery</div>
+          </div>
+          <div class="stat">
+            <div class="num">Clean</div>
+            <div class="label">Architecture</div>
+          </div>
+          <div class="stat">
+            <div class="num">Real</div>
+            <div class="label">Automation</div>
+          </div>
+          <div class="stat">
+            <div class="num">Pro</div>
+            <div class="label">Branding</div>
+          </div>
+        </div>
 
+        <div class="item">
+          <b>Focus</b>
+          <p>Automation workflows, integrations, and scalable bot systems.</p>
+          <div class="chips">
+            <span class="chip">Google Sheets</span>
+            <span class="chip">Webhooks</span>
+            <span class="chip">APIs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section fade d3" id="skills">
+      <h2>Skills</h2>
+      <div class="grid">
+        <div class="item">
+          <b>n8n Workflows</b>
+          <p>Building clean, modular workflows with triggers, routers, error handling and logs.</p>
+          <div class="chips"><span class="chip">Automation</span><span class="chip">Scheduling</span></div>
+        </div>
+        <div class="item">
+          <b>Python</b>
+          <p>Scripts for data handling, API calls, and automation helpers.</p>
+          <div class="chips"><span class="chip">Requests</span><span class="chip">Data</span></div>
+        </div>
+        <div class="item">
+          <b>API Integration</b>
+          <p>Webhook-based systems, REST APIs, and connecting services together.</p>
+          <div class="chips"><span class="chip">REST</span><span class="chip">Webhooks</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section fade d4" id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <div class="item">
+          <b>Telegram Language Coach Bot</b>
+          <p>Personalized learning flow: level check, content delivery, progress tracking.</p>
+          <div class="chips"><span class="chip">Telegram</span><span class="chip">n8n</span></div>
+        </div>
+        <div class="item">
+          <b>Migraine Support Bot</b>
+          <p>Daily check-ins, helpful tips, and tracking user answers in Google Sheets.</p>
+          <div class="chips"><span class="chip">Sheets</span><span class="chip">Automation</span></div>
+        </div>
+        <div class="item">
+          <b>Client Automation Systems</b>
+          <p>Booking + notifications + email/WhatsApp flows with reliable delivery.</p>
+          <div class="chips"><span class="chip">Integrations</span><span class="chip">Webhooks</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section" id="contact">
+      <h2>Contact</h2>
+      <div class="grid">
+        <div class="item">
+          <b>Email</b>
+          <p>Put your email here (example: arkin@email.com)</p>
+        </div>
+        <div class="item">
+          <b>GitHub</b>
+          <p><a href="https://github.com/Arkinmehdinezhad" target="_blank" rel="noopener">github.com/Arkinmehdinezhad</a></p>
+        </div>
+        <div class="item">
+          <b>Telegram</b>
+          <p>Put your Telegram username here</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Arkin Mehdinezhad</span>
+      <span>Built with GitHub Pages • Dark Minimal Style</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
