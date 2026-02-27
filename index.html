@@ -131,23 +131,21 @@
       background: rgba(255,255,255,.05);
       border:1px solid var(--line);
     }
-    .pic{
-      width:56px; height:56px; border-radius:14px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(0,191,255,.55), transparent 50%),
-        radial-gradient(circle at 70% 60%, rgba(77,210,255,.35), transparent 55%),
-        rgba(255,255,255,.06);
+
+    /* ✅ Real photo */
+    .realpic{
+      width:56px;
+      height:56px;
+      border-radius:14px;
+      object-fit:cover;
       border:1px solid rgba(255,255,255,.14);
-      position:relative;
-      overflow:hidden;
+      box-shadow: 0 0 0 3px rgba(0,191,255,.08), 0 14px 40px rgba(0,0,0,.45);
     }
-    .pic::after{
-      content:"";
-      position:absolute; inset:-40%;
-      background: conic-gradient(from 220deg, transparent, rgba(255,255,255,.12), transparent);
-      animation: spin 5s linear infinite;
+    .realpic:hover{
+      transform: translateY(-1px);
+      transition: transform .15s ease;
     }
-    @keyframes spin{ to{ transform: rotate(360deg);} }
+
     .who b{display:block; font-size:16px}
     .who span{color:var(--muted); font-size:13px}
 
@@ -262,7 +260,6 @@
         </div>
 
         <div class="actions">
-          <!-- لینک‌ها رو بعداً عوض می‌کنی -->
           <a class="btn primary" href="#contact">Contact me</a>
           <a class="btn" href="https://github.com/Arkinmehdinezhad" target="_blank" rel="noopener">GitHub</a>
         </div>
@@ -270,7 +267,8 @@
 
       <div class="card hero-right fade d2">
         <div class="avatar">
-          <div class="pic" title="Add your photo later"></div>
+          <!-- ✅ Your real photo -->
+          <img src="profile.png" alt="Arkin Mehdinezhad" class="realpic">
           <div class="who">
             <b>Automation Developer</b>
             <span>n8n • Python • Telegram Bots</span>
@@ -373,7 +371,9 @@
 
     <footer>
       <span>© <span id="year"></span> Arkin Mehdinezhad</span>
-     
+      <span>Built with GitHub Pages • Dark Minimal Style</span>
+    </footer>
+  </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
